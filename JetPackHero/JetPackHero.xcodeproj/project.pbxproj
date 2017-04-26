@@ -36,6 +36,7 @@
 		D9A6FBC01EAFF2C50039A983 /* PlayerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FBBF1EAFF2C50039A983 /* PlayerEntity.swift */; };
 		D9A6FBC21EAFF35B0039A983 /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FBC11EAFF35B0039A983 /* SpriteComponent.swift */; };
 		D9A6FBC41EAFF7DF0039A983 /* MovementComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FBC31EAFF7DF0039A983 /* MovementComponent.swift */; };
+		D9A6FBC61EB054350039A983 /* ObstacleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FBC51EB054350039A983 /* ObstacleEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		D9A6FBBF1EAFF2C50039A983 /* PlayerEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerEntity.swift; sourceTree = "<group>"; };
 		D9A6FBC11EAFF35B0039A983 /* SpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
 		D9A6FBC31EAFF7DF0039A983 /* MovementComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovementComponent.swift; sourceTree = "<group>"; };
+		D9A6FBC51EB054350039A983 /* ObstacleEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObstacleEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				D9A6FBBF1EAFF2C50039A983 /* PlayerEntity.swift */,
+				D9A6FBC51EB054350039A983 /* ObstacleEntity.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				D9A6FBB01EAFEEE00039A983 /* SKColor+Extensions.swift in Sources */,
 				D9A6FBC01EAFF2C50039A983 /* PlayerEntity.swift in Sources */,
 				D9A6FB611EAD4E430039A983 /* GameViewController.swift in Sources */,
+				D9A6FBC61EB054350039A983 /* ObstacleEntity.swift in Sources */,
 				D9A6FBC21EAFF35B0039A983 /* SpriteComponent.swift in Sources */,
 				D9A6FBAE1EAFEEE00039A983 /* SKAction+Extensions.swift in Sources */,
 				D9A6FBB51EAFEEE00039A983 /* Vector3.swift in Sources */,

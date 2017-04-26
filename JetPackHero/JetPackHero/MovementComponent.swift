@@ -38,6 +38,7 @@ class MovementComponent: GKComponent {
     func applyMovement(_ seconds: TimeInterval) {
         let spriteNode = spriteComponent.node
         print(spriteNode.position)
+        
         //Apply Gravity
         let gravityStep = CGPoint(x: 0, y: gravity) * CGFloat(seconds)
         velocity += gravityStep
@@ -56,10 +57,22 @@ class MovementComponent: GKComponent {
         }
     }
     
+//    func applyNewMovement(_ seconds: TimeInterval) {
+//        let spriteNode = spriteComponent.node
+//        
+//        if velocity.y == 0  {
+//            let velocityStep = velocity * CGFloat(seconds)
+//        } else {
+//            
+//        }
+//    }
+    
     override func update(deltaTime seconds: TimeInterval) {
-        if let player = entity as? PlayerEntity {
+       // if let player = entity as? PlayerEntity {
             applyMovement(seconds)
-        }
+            //ascend(seconds)
+            //descend(seconds)
+        //}
     }
     
 }
