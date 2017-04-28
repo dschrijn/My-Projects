@@ -18,6 +18,13 @@ class ObstacleEntity: GKEntity {
         let texture = SKTexture(imageNamed: imageName)
         spriteComponent = SpriteComponent(entity: self, texture: texture, size: texture.size())
         addComponent(spriteComponent)
+        
+        //Adding Physics
+        let spriteNode = spriteComponent.node
+        spriteNode.physicsBody = SKPhysicsBody(rectangleOf: spriteNode.size)
+        spriteNode.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
+        spriteNode.physicsBody?.collisionBitMask = 0
+        spriteNode.physicsBody?.contactTestBitMask = PhysicsCategory.Player
     }
     
     required init?(coder aDecoder: NSCoder) {

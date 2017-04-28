@@ -18,6 +18,15 @@ class MovementComponent: GKComponent {
     let impulse: CGFloat = 500
     var playableStart: CGFloat = 0
     let yMax: CGFloat = 1050
+    let jetPackAction = SKAction.playSoundFileNamed("flapping.wav", waitForCompletion: false)
+    
+    var velocityModifier: CGFloat = 1000.0
+    var angularVelocity: CGFloat = 0.0
+    let minDegree: CGFloat = -90
+    let maxDegree: CGFloat = 25
+    
+    var lastTouchTime: TimeInterval = 0
+    var lastTouchY: CGFloat = 0.0
     
     init(entity: GKEntity) {
         self.spriteComponent = entity.component(ofType: SpriteComponent.self)!
@@ -29,9 +38,18 @@ class MovementComponent: GKComponent {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //Double for initial impulse
+    func applyInitialImpulse() {
+        velocity = CGPoint(x: 0, y: impulse * 2)
+    }
     //Func to ascend up when tapped.
     func applyImpulse(_ lastUpdateTime: TimeInterval) {
+        spriteComponent.node.run(jetPackAction)
         velocity = CGPoint(x: 0, y: impulse)
+        
+        angularVelocity = velocityModifier.radiansToDegrees()
+        lastTouchTime = lastUpdateTime
+        lastTouchY = spriteComponent.node.position.y
     }
     
     //Func to calculate the movement with time interval.
@@ -51,6 +69,15 @@ class MovementComponent: GKComponent {
         }
         spriteNode.position += velocityStep
         
+        if spriteNode.position.y < lastTouchY {
+            angularVelocity = -velocityModifier.radiansToDegrees()
+        }
+        
+        //Rotation
+        let angularStep = angularVelocity * CGFloat(seconds)
+        spriteNode.zRotation += angularStep
+        spriteNode.zRotation = min(max(spriteNode.zRotation, minDegree.degreesToRadians()), maxDegree.degreesToRadians())
+        
         //Temporary Ground Hit
         if spriteNode.position.y - spriteNode.size.height / 2 < playableStart {
             spriteNode.position = CGPoint(x: spriteNode.position.x, y: playableStart + spriteNode.size.height / 2)
@@ -68,11 +95,13 @@ class MovementComponent: GKComponent {
 //    }
     
     override func update(deltaTime seconds: TimeInterval) {
-       // if let player = entity as? PlayerEntity {
+        if let player = entity as? PlayerEntity {
+            if player.movementAllowed {
             applyMovement(seconds)
             //ascend(seconds)
             //descend(seconds)
-        //}
-    }
+            }
+        }
     
+    }
 }
