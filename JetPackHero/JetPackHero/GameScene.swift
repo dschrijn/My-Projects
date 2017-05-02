@@ -50,7 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let gapMultiplier: CGFloat = 7.5 //Increase number to decrease difficulty.
     let firstSpawnDelay: TimeInterval = 1.75
     let everySpawnDelay: TimeInterval = 1.5
-    let player = PlayerEntity(imageName: "Bird0")
+    let player = PlayerEntity(imageName: "Bob0")
     let popAction = SKAction.playSoundFileNamed("pop.wav", waitForCompletion: false)
     let gameMusic = SKAction.playSoundFileNamed("epic.wav", waitForCompletion: false)
     var score = 0
