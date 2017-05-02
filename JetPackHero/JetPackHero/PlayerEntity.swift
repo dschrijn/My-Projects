@@ -14,6 +14,7 @@ class PlayerEntity: GKEntity {
     var movementComponent: MovementComponent!
     var movementAllowed = false
     var animationComponent: AnimationComponent!
+    var punchingComponent: PunchingComponent!
     var numberOfFrames = 3
     
     init (imageName: String) {
@@ -26,13 +27,27 @@ class PlayerEntity: GKEntity {
         movementComponent = MovementComponent(entity: self)
         addComponent(movementComponent)
         
-        //Adding Textures
+//        //Adding punch textures
+//        //Forward punch
+//        var punchTextures: Array<SKTexture> = []
+//        for i in 0..<numberOfFrames {
+//            punchTextures.append(SKTexture(imageNamed: "Punch\(i)"))
+//        }
+//        //Backwards punch
+//        for i in stride(from: numberOfFrames, to: 0, by: -1) {
+//            punchTextures.append(SKTexture(imageNamed: "Punch\(i)"))
+//        }
+//        //Add to Entity
+//        punchingComponent = PunchingComponent(entity: self, textures: punchTextures)
+//        addComponent(punchingComponent)
+        
+        //Adding Flapping Textures
         //Forward Animation
         var textures: Array<SKTexture> = []
         for i in 0..<numberOfFrames {
             textures.append(SKTexture(imageNamed: "Bird\(i)"))
         }
-        //Backwards Animation
+        //Backwards Animation // Refactor for flapping animation
         for i in stride(from: numberOfFrames, to: 0, by: -1) {
              textures.append(SKTexture(imageNamed: "Bird\(i)"))
         }
@@ -40,6 +55,8 @@ class PlayerEntity: GKEntity {
         animationComponent = AnimationComponent(entity: self, textures: textures)
         addComponent(animationComponent)
         movementComponent.applyInitialImpulse()
+        
+        
         
         //Add Physics
         let spriteNode = spriteComponent.node

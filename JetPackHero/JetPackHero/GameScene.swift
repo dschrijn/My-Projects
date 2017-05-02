@@ -12,6 +12,7 @@ import GameplayKit
 enum Layer: CGFloat {
     case background
     case obstacle
+    case star
     case foreground
     case player
     case ui
@@ -22,7 +23,8 @@ struct PhysicsCategory {
     static let None: UInt32 = 0
     static let Player: UInt32 = 0b1
     static let Obstacle: UInt32 = 0b10
-    static let Ground: UInt32 = 0b100
+    static let Star: UInt32 = 0b100
+    static let Ground: UInt32 = 0b1000
 }
 
 protocol GameSceneDelegate {
@@ -45,11 +47,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastUpdateTimeInterval: TimeInterval = 0
     let bottomObstacleMinFraction: CGFloat = 0.1
     let bottomObstacleMaxFraction: CGFloat = 0.6
-    let gapMultiplier: CGFloat = 4.5 //Increase number to decrease difficulty.
+    let gapMultiplier: CGFloat = 7.5 //Increase number to decrease difficulty.
     let firstSpawnDelay: TimeInterval = 1.75
     let everySpawnDelay: TimeInterval = 1.5
     let player = PlayerEntity(imageName: "Bird0")
     let popAction = SKAction.playSoundFileNamed("pop.wav", waitForCompletion: false)
+    let gameMusic = SKAction.playSoundFileNamed("epic.wav", waitForCompletion: false)
     var score = 0
     var scoreLabel: SKLabelNode!
     var fontName = "HelveticaNeue-Bold"
@@ -72,7 +75,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }    
+    }
     
     override func didMove(to view: SKView) {
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
@@ -98,6 +101,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         stateMachine.update(deltaTime: deltaTime)
         player.update(deltaTime: deltaTime)
+        
+//        if player.punchingComponent.isPunching {
+//            groundSpeed = 500
+//            
+//            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+//                self.groundSpeed = 150
+//            })
+//        }
     }
     
     // Mark: Functions
@@ -144,7 +156,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             //Setting sprite node and ground speed from update function.
             if let foreground = node as? SKSpriteNode {
                 let moveAmount = CGPoint(x: -self.groundSpeed * CGFloat(self.deltaTime), y: 0)
-
+                
                 foreground.position += moveAmount
                 
                 if foreground.position.x < -foreground.size.width {
@@ -153,7 +165,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         })
     }
-
+    
     //Adding Player
     func setupPlayer() {
         let playerNode = player.spriteComponent.node
@@ -208,10 +220,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return obstacle.spriteComponent.node
     }
     
-    //Stopping Spawning Function
+    //Adding Star(Power-Up)
+    func createStar() -> SKSpriteNode {
+        let star = StarEntity(imageName: "star")
+        let starNode = star.spriteComponent.node
+        starNode.zPosition = Layer.star.rawValue
+        starNode.name = "star"
+        return star.spriteComponent.node
+    }
+    
+    //Stopping Spawning Functions
     func stopSpawning() {
         removeAction(forKey: "spawn")
         worldNode.enumerateChildNodes(withName: "obstacle", using: { node, stop in node.removeAllActions()
+        })
+        worldNode.enumerateChildNodes(withName: "star", using: { node, stop in node.removeAllActions()
         })
     }
     
@@ -228,6 +251,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         run(overallSequence, withKey: "spawn")
     }
+    
     
     //Adding obstacle spawning
     func spawnObstacle() {
@@ -252,16 +276,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         topObstacle.position = CGPoint(x: startX, y: bottomObstacle.position.y + bottomObstacle.size.height / 2 + topObstacle.size.height / 2 + player.spriteComponent.node.size.height * gapMultiplier)
         worldNode.addChild(topObstacle)
         
+        
+        //Create Star
+        let starNode = createStar()
+        starNode.position = CGPoint(x: startX, y: (bottomObstacle.size.height + topObstacle.frame.minY) / 2)
+        worldNode.addChild(starNode)
+        starNode.isHidden = true
+        if score == 1 {
+          starNode.isHidden = false
+        } else {
+            starNode.isHidden = true
+        }
+        
+        
+        
         //Move Obstacles
         let moveX = size.width + topObstacle.size.width
         let moveDuration = moveX / groundSpeed
         
         let sequence = SKAction.sequence([SKAction.moveBy(x: -moveX, y: 0, duration: TimeInterval(moveDuration)),
                                           SKAction.removeFromParent()
-                                        ])
+            ])
         
         topObstacle.run(sequence)
         bottomObstacle.run(sequence)
+        starNode.run(sequence)
     }
     //Restart Game Function
     func restartGame(_ stateClass: AnyClass) {
@@ -302,7 +341,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // print("hit ground")
             stateMachine.enter(GameOverState.self)
         }
-        if other.categoryBitMask == PhysicsCategory.Obstacle {
+        
+//        if other.categoryBitMask == PhysicsCategory.Obstacle && player.punchingComponent.isPunching {
+//            
+//            return
+            //            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+            //                self.groundSpeed = 150
+            //            })
+         else if other.categoryBitMask == PhysicsCategory.Obstacle {
             // print("hit obstacle")
             stateMachine.enter(FallingState.self)
         }
@@ -310,14 +356,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Func when touch Begins.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // player.movementComponent.applyImpulse(lastUpdateTimeInterval)
         
         if let touch = touches.first {
             let touchLocation = touch.location(in: self)
             
             switch stateMachine.currentState {
             case is MainMenuState:
-                if touchLocation.y < size.height * 0.15 { //Refactor to take out Learn button
+                if touchLocation.y < size.height * 0.15 { // TODO: Refactor to take out Learn button
                     learn()
                 } else if touchLocation.x < size.width * 0.6 {
                     restartGame(TutorialState.self)
@@ -326,8 +371,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             case is TutorialState:
                 stateMachine.enter(PlayingState.self)
-            case is PlayingState:
-                player.movementComponent.applyImpulse(lastUpdateTimeInterval)
+            case is PlayingState: // TODO: Enter if statement for touching punch button
+                if touchLocation.y < size.height * 0.15 {
+                    self.player.punchingComponent.applyPunch(lastUpdateTimeInterval)
+                } else {
+                    player.movementComponent.applyImpulse(lastUpdateTimeInterval)
+                }
             case is GameOverState:
                 if touchLocation.x < size.width * 0.6 {
                     restartGame(TutorialState.self)
@@ -338,14 +387,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 break
             }
         }
-
+        
     }
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        player.movementComponent.ascend(lastUpdateTimeInterval)
-//    }
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        player.movementComponent.descend(lastUpdateTimeInterval)
-//    }
     
 }

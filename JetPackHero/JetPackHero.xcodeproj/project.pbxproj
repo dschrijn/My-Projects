@@ -43,6 +43,10 @@
 		D9A6FBFC1EB15ADE0039A983 /* MainMenuState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FBFB1EB15ADE0039A983 /* MainMenuState.swift */; };
 		D9A6FBFE1EB15AEF0039A983 /* TutorialState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FBFD1EB15AEF0039A983 /* TutorialState.swift */; };
 		D9A6FC001EB3B4EA0039A983 /* AnimationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FBFF1EB3B4EA0039A983 /* AnimationComponent.swift */; };
+		D9A6FC021EB797500039A983 /* PunchingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FC011EB797500039A983 /* PunchingComponent.swift */; };
+		D9A6FC041EB7E4870039A983 /* epic.wav in Resources */ = {isa = PBXBuildFile; fileRef = D9A6FC031EB7E4870039A983 /* epic.wav */; };
+		D9A6FC061EB7F5C10039A983 /* StarEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FC051EB7F5C10039A983 /* StarEntity.swift */; };
+		D9A6FC081EB820310039A983 /* MusicPlayerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FC071EB820310039A983 /* MusicPlayerComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +88,10 @@
 		D9A6FBFB1EB15ADE0039A983 /* MainMenuState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuState.swift; sourceTree = "<group>"; };
 		D9A6FBFD1EB15AEF0039A983 /* TutorialState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialState.swift; sourceTree = "<group>"; };
 		D9A6FBFF1EB3B4EA0039A983 /* AnimationComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationComponent.swift; sourceTree = "<group>"; };
+		D9A6FC011EB797500039A983 /* PunchingComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PunchingComponent.swift; sourceTree = "<group>"; };
+		D9A6FC031EB7E4870039A983 /* epic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epic.wav; sourceTree = "<group>"; };
+		D9A6FC051EB7F5C10039A983 /* StarEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarEntity.swift; sourceTree = "<group>"; };
+		D9A6FC071EB820310039A983 /* MusicPlayerComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +144,7 @@
 			children = (
 				D9A6FBBF1EAFF2C50039A983 /* PlayerEntity.swift */,
 				D9A6FBC51EB054350039A983 /* ObstacleEntity.swift */,
+				D9A6FC051EB7F5C10039A983 /* StarEntity.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -146,6 +155,8 @@
 				D9A6FBC11EAFF35B0039A983 /* SpriteComponent.swift */,
 				D9A6FBC31EAFF7DF0039A983 /* MovementComponent.swift */,
 				D9A6FBFF1EB3B4EA0039A983 /* AnimationComponent.swift */,
+				D9A6FC011EB797500039A983 /* PunchingComponent.swift */,
+				D9A6FC071EB820310039A983 /* MusicPlayerComponent.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -212,6 +223,7 @@
 			children = (
 				D9A6FBD41EB14C770039A983 /* coin.wav */,
 				D9A6FBD51EB14C770039A983 /* ding.wav */,
+				D9A6FC031EB7E4870039A983 /* epic.wav */,
 				D9A6FBD61EB14C770039A983 /* falling.wav */,
 				D9A6FBD71EB14C770039A983 /* flapping.wav */,
 				D9A6FBD81EB14C770039A983 /* hitGround.wav */,
@@ -290,6 +302,7 @@
 				D9A6FBE21EB14C770039A983 /* whack.wav in Resources */,
 				D9A6FB641EAD4E430039A983 /* Main.storyboard in Resources */,
 				D9A6FB661EAD4E430039A983 /* Assets.xcassets in Resources */,
+				D9A6FC041EB7E4870039A983 /* epic.wav in Resources */,
 				D9A6FBDB1EB14C770039A983 /* sprites.atlas in Resources */,
 				D9A6FB691EAD4E430039A983 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -302,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9A6FC061EB7F5C10039A983 /* StarEntity.swift in Sources */,
 				D9A6FBFA1EB14D4C0039A983 /* Vector3.swift in Sources */,
 				D9A6FBF41EB14D4C0039A983 /* SKAction+SpecialEffects.swift in Sources */,
 				D9A6FBF81EB14D4C0039A983 /* SKTEffects.swift in Sources */,
@@ -315,6 +329,7 @@
 				D9A6FBCB1EB1381E0039A983 /* FallingState.swift in Sources */,
 				D9A6FBF31EB14D4C0039A983 /* SKAction+Extensions.swift in Sources */,
 				D9A6FBC21EAFF35B0039A983 /* SpriteComponent.swift in Sources */,
+				D9A6FC081EB820310039A983 /* MusicPlayerComponent.swift in Sources */,
 				D9A6FBCD1EB138510039A983 /* GaveOverState.swift in Sources */,
 				D9A6FBC41EAFF7DF0039A983 /* MovementComponent.swift in Sources */,
 				D9A6FBF61EB14D4C0039A983 /* SKNode+Extensions.swift in Sources */,
@@ -325,6 +340,7 @@
 				D9A6FBFE1EB15AEF0039A983 /* TutorialState.swift in Sources */,
 				D9A6FBF11EB14D4C0039A983 /* CGVector+Extensions.swift in Sources */,
 				D9A6FBF51EB14D4C0039A983 /* SKColor+Extensions.swift in Sources */,
+				D9A6FC021EB797500039A983 /* PunchingComponent.swift in Sources */,
 				D9A6FBF71EB14D4C0039A983 /* SKTAudio.swift in Sources */,
 				D9A6FB591EAD4E430039A983 /* AppDelegate.swift in Sources */,
 			);

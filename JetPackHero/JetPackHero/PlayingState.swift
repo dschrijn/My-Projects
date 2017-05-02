@@ -11,6 +11,8 @@ import GameplayKit
 
 class PlayingState: GKState {
     unowned let scene: GameScene
+    var numberOfFrames = 3
+    var punchButton: SKSpriteNode?
     
     init(scene: SKScene) {
         self.scene = scene as! GameScene
@@ -23,6 +25,16 @@ class PlayingState: GKState {
         scene.player.movementAllowed = true
         scene.player.animationComponent.startAnimation()
         scene.player.animationComponent.stopWobble()
+        setupPunchButton()
+        MusicManager.shared.setup()
+        MusicManager.shared.play()
+
+    }
+    
+    override func willExit(to nextState: GKState) {
+        removePunchButton()
+        MusicManager.shared.stop()
+    
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
@@ -33,4 +45,24 @@ class PlayingState: GKState {
         scene.updateForeground()
         scene.updateScore()
     }
+    
+    //Creating Punch Button
+    func setupPunchButton() {
+        
+        punchButton = SKSpriteNode(imageNamed: "Button")
+        punchButton?.position = CGPoint(x: scene.size.width * 0.5, y: punchButton!.size.height / 2 + scene.margin)
+        punchButton?.zPosition = Layer.ui.rawValue
+        scene.worldNode.addChild(punchButton!)
+        
+        let punchButtonText = SKSpriteNode(imageNamed: "Play")
+        punchButtonText.position = CGPoint.zero
+        punchButton?.addChild(punchButtonText)
+        
+    }
+    
+    func removePunchButton() {
+        punchButton?.removeFromParent()
+        punchButton = nil
+    }
+
 }

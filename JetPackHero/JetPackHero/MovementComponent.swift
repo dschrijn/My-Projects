@@ -14,10 +14,10 @@ class MovementComponent: GKComponent {
     
     //Tapping functionality variables
     var velocity =  CGPoint.zero
-    let gravity: CGFloat = -1500
+    let gravity: CGFloat = -1000
     let impulse: CGFloat = 500
     var playableStart: CGFloat = 0
-    let yMax: CGFloat = 1050
+    let yMax: CGFloat = 1000
     let jetPackAction = SKAction.playSoundFileNamed("flapping.wav", waitForCompletion: false)
     
     var velocityModifier: CGFloat = 1000.0
@@ -40,7 +40,7 @@ class MovementComponent: GKComponent {
     
     //Double for initial impulse
     func applyInitialImpulse() {
-        velocity = CGPoint(x: 0, y: impulse * 2)
+        velocity = CGPoint(x: 0, y: impulse * 1.0)
     }
     //Func to ascend up when tapped.
     func applyImpulse(_ lastUpdateTime: TimeInterval) {
@@ -63,11 +63,14 @@ class MovementComponent: GKComponent {
         
         //Apply Velocity & set height constraint
         var velocityStep = velocity * CGFloat(seconds)
+        
         let newPos = velocity + spriteNode.position
         if newPos.y > yMax {
             velocityStep = gravityStep
         }
+        
         spriteNode.position += velocityStep
+        
         
         if spriteNode.position.y < lastTouchY {
             angularVelocity = -velocityModifier.radiansToDegrees()
@@ -78,30 +81,18 @@ class MovementComponent: GKComponent {
         spriteNode.zRotation += angularStep
         spriteNode.zRotation = min(max(spriteNode.zRotation, minDegree.degreesToRadians()), maxDegree.degreesToRadians())
         
-        //Temporary Ground Hit
+        //Ground Collusion
         if spriteNode.position.y - spriteNode.size.height / 2 < playableStart {
             spriteNode.position = CGPoint(x: spriteNode.position.x, y: playableStart + spriteNode.size.height / 2)
         }
     }
     
-//    func applyNewMovement(_ seconds: TimeInterval) {
-//        let spriteNode = spriteComponent.node
-//        
-//        if velocity.y == 0  {
-//            let velocityStep = velocity * CGFloat(seconds)
-//        } else {
-//            
-//        }
-//    }
-    
     override func update(deltaTime seconds: TimeInterval) {
         if let player = entity as? PlayerEntity {
             if player.movementAllowed {
-            applyMovement(seconds)
-            //ascend(seconds)
-            //descend(seconds)
+                applyMovement(seconds)
             }
         }
-    
+        
     }
 }
