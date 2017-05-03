@@ -26,8 +26,6 @@ class StarComponent: GKComponent {
     
     func applyInvulnerable(_ timeInterval: TimeInterval) {
         if !isInvulnerable {
-            //Sprite
-            let spriteNode = spriteComponent.node as? PlayerEntity
             
             isInvulnerable = true
             print("I'm invicible!!")

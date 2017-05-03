@@ -10,22 +10,26 @@ import SpriteKit
 import GameplayKit
 
 class ObstacleEntity: GKEntity {
-    var spriteComponent: SpriteComponent!
+    
+    let texture: SKTexture
+    
+    lazy var spriteComponent: SpriteComponent = {
+       return SpriteComponent(entity: self, texture: self.texture, size: self.texture.size())
+    }()
     
     init(imageName: String) {
+        self.texture = SKTexture(imageNamed: imageName)
         super.init()
         
-        let texture = SKTexture(imageNamed: imageName)
-        spriteComponent = SpriteComponent(entity: self, texture: texture, size: texture.size())
-        addComponent(spriteComponent)
+        self.addComponent(self.spriteComponent)
         
         //Adding Physics
         let spriteNode = spriteComponent.node
         let center = CGPoint(x: spriteNode.frame.midX, y: spriteNode.frame.midY)
         spriteNode.physicsBody = SKPhysicsBody(rectangleOf: spriteNode.size, center: center)
-        spriteNode.physicsBody!.categoryBitMask = PhysicsCategory.Obstacle
+        spriteNode.physicsBody!.categoryBitMask = PhysicsCategory.obstacle.rawValue
         spriteNode.physicsBody!.collisionBitMask = 0
-        spriteNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
+        spriteNode.physicsBody!.contactTestBitMask = PhysicsCategory.player.rawValue
     }
     
     required init?(coder aDecoder: NSCoder) {

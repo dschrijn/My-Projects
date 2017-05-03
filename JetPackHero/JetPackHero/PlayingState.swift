@@ -25,14 +25,13 @@ class PlayingState: GKState {
         scene.player.movementAllowed = true
         //scene.player.animationComponent.startAnimation()
         scene.player.animationComponent.stopWobble()
-        setupPunchButton()
         MusicManager.shared.setup()
         MusicManager.shared.play()
 
     }
     
     override func willExit(to nextState: GKState) {
-        removePunchButton()
+
         MusicManager.shared.stop()
     
     }
@@ -44,25 +43,6 @@ class PlayingState: GKState {
     override func update(deltaTime seconds: TimeInterval) {
         scene.updateForeground()
         scene.updateScore()
-    }
-    
-    //Creating Punch Button
-    func setupPunchButton() {
-        
-        punchButton = SKSpriteNode(imageNamed: "Button")
-        punchButton?.position = CGPoint(x: scene.size.width * 0.5, y: punchButton!.size.height / 2 + scene.margin)
-        punchButton?.zPosition = Layer.ui.rawValue
-        scene.worldNode.addChild(punchButton!)
-        
-        let punchButtonText = SKSpriteNode(imageNamed: "Play")
-        punchButtonText.position = CGPoint.zero
-        punchButton?.addChild(punchButtonText)
-        
-    }
-    
-    func removePunchButton() {
-        punchButton?.removeFromParent()
-        punchButton = nil
     }
 
 }

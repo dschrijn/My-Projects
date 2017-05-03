@@ -19,19 +19,19 @@ enum Layer: CGFloat {
     case flash
 }
 
-struct PhysicsCategory {
-    static let None: UInt32 = 0
-    static let Player: UInt32 = 0b1
-    static let Obstacle: UInt32 = 0b10
-    static let Star: UInt32 = 0b100
-    static let Ground: UInt32 = 0b1000
+enum PhysicsCategory: UInt32 {
+    case none = 0
+    case player = 0b1
+    case obstacle = 0b10
+    case star = 0b100
+    case ground = 0b1000
 }
 
 protocol GameSceneDelegate {
     func screenShot() -> UIImage
     func shareString(_ string: String, url: URL, image: UIImage)
-    
 }
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
@@ -47,11 +47,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastUpdateTimeInterval: TimeInterval = 0
     let bottomObstacleMinFraction: CGFloat = 0.1
     let bottomObstacleMaxFraction: CGFloat = 0.6
-    let gapMultiplier: CGFloat = 7.5 //Increase number to decrease difficulty.
-    let firstSpawnDelay: TimeInterval = 1.75
-    let everySpawnDelay: TimeInterval = 1.5
+    let gapMultiplier: CGFloat = 5.0 //Increase number to decrease difficulty.
+    var firstSpawnDelay: TimeInterval = 1.75
+    var everySpawnDelay: TimeInterval = 1.5
     let player = PlayerEntity(imageName: "Bird0")
-    let star = StarEntity(imageName: "star")
     let popAction = SKAction.playSoundFileNamed("pop.wav", waitForCompletion: false)
     let gameMusic = SKAction.playSoundFileNamed("epic.wav", waitForCompletion: false)
     var score = 0
@@ -104,14 +103,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         stateMachine.update(deltaTime: deltaTime)
         player.update(deltaTime: deltaTime)
         
-//        if player.starComponent.isInvulnerable {
-//            groundSpeed = 500
-//            
-//            
-//            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10), execute: {
-//                self.groundSpeed = 150
-//            })
-//        }
     }
     
     // Mark: Functions
@@ -132,9 +123,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let lowerLeft = CGPoint(x: 0, y: playableStart)
         let lowerRight = CGPoint(x: size.width, y: playableStart)
         physicsBody = SKPhysicsBody(edgeFrom: lowerLeft, to: lowerRight)
-        physicsBody?.categoryBitMask = PhysicsCategory.Ground
+        physicsBody?.categoryBitMask = PhysicsCategory.ground.rawValue
         physicsBody?.collisionBitMask = 0
-        physicsBody?.contactTestBitMask = PhysicsCategory.Player
+        physicsBody?.contactTestBitMask = PhysicsCategory.player.rawValue
     }
     
     //Setup foreground
@@ -214,7 +205,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Adding Obstacle
     func createObstacle() -> SKSpriteNode {
-        let obstacle = ObstacleEntity(imageName: "Cactus")
+        let obstacle = ObstacleEntity(imageName: "tree")
         let obstacleNode = obstacle.spriteComponent.node
         obstacleNode.zPosition = Layer.obstacle.rawValue
         obstacleNode.name = "obstacle"
@@ -224,19 +215,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Adding Star(Power-Up)
     func createStar() -> SKSpriteNode {
+        let star = StarEntity(imageName: "star")
         let starNode = star.spriteComponent.node
         starNode.zPosition = Layer.star.rawValue
         starNode.name = "star"
-        return star.spriteComponent.node
+        return starNode
     }
     
     //Stopping Spawning Functions
     func stopSpawning() {
         removeAction(forKey: "spawn")
-        worldNode.enumerateChildNodes(withName: "obstacle", using: { node, stop in node.removeAllActions()
+        worldNode.enumerateChildNodes(withName: "obstacle", using: { node, stop in
+            node.removeAllActions()
         })
-        worldNode.enumerateChildNodes(withName: "star", using: { node, stop in node.removeAllActions()
+        worldNode.enumerateChildNodes(withName: "star", using: { node, stop in
+            node.removeAllActions()
         })
+    }
+    
+    func removeAllStars() {
+        worldNode.enumerateChildNodes(withName: "star") { (node, stop) in
+            node.removeFromParent()
+        }
+    }
+    
+    func removeAllObstacle() {
+        worldNode.enumerateChildNodes(withName: "obstacle") { (node, stop) in
+            node.removeFromParent()
+        }
     }
     
     //Spawning Multiple Obstacles
@@ -282,7 +288,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let randomInt = Int(arc4random_uniform(UInt32(100)))
         var starNode: SKSpriteNode?
-        if randomInt <= 25 {
+        if randomInt <= 25 && !player.starComponent.isInvulnerable {
             starNode = createStar()
             starNode!.position = CGPoint(x: startX, y: (bottomObstacle.size.height + topObstacle.frame.minY) / 2)
             worldNode.addChild(starNode!)
@@ -298,6 +304,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         topObstacle.run(sequence)
         bottomObstacle.run(sequence)
+        
         if let starNode = starNode {
             starNode.run(sequence)
         }
@@ -336,24 +343,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Func for Physics to begin
     func didBegin(_ contact: SKPhysicsContact) {
-        let other = contact.bodyA.categoryBitMask == PhysicsCategory.Player ? contact.bodyB : contact.bodyA
-        if other.categoryBitMask == PhysicsCategory.Ground {
-            // print("hit ground")
-            stateMachine.enter(GameOverState.self)
-        }
+        let other = contact.bodyA.categoryBitMask == PhysicsCategory.player.rawValue ? contact.bodyB : contact.bodyA
         
-        if other.categoryBitMask == PhysicsCategory.Star {
+        switch PhysicsCategory(rawValue: other.categoryBitMask) {
+        case .ground?:
+            stateMachine.enter(GameOverState.self)
+        case .star?:
             groundSpeed = 500 // TODO: Does not effect groundSpeed in createOstacle
-            star.spriteComponent.node.isHidden = true
+            player.animationComponent.playerInvicible()
+            let invulnerableTime = 8
+            player.starComponent.applyInvulnerable(TimeInterval(invulnerableTime))
+            removeAllStars()
+            let spawnAction = action(forKey: "spawn")
+            spawnAction?.speed = 1.7
+
             
-            return
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                    self.groundSpeed = 150
-                })
-        } else if other.categoryBitMask == PhysicsCategory.Obstacle {
-            // print("hit obstacle")
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(invulnerableTime), execute: {
+                self.groundSpeed = 150
+                spawnAction?.speed = 1.0
+                self.player.animationComponent.stopAnimation("Invicible")
+            })
+        case .obstacle? where !player.starComponent.isInvulnerable:
+            self.player.animationComponent.stopAnimation("Invicible")
             stateMachine.enter(FallingState.self)
-            star.spriteComponent.node.isHidden = false
+        default:
+            break
         }
     }
     
@@ -375,11 +389,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             case is TutorialState:
                 stateMachine.enter(PlayingState.self)
             case is PlayingState: // TODO: Refactor
-
-                    player.movementComponent.applyImpulse(lastUpdateTimeInterval)
-                    if touchLocation == touchLocation {
-                        self.player.animationComponent.startAnimation()
-                    }
+                
+                player.movementComponent.applyImpulse(lastUpdateTimeInterval)
+                if touchLocation == touchLocation {
+                    self.player.animationComponent.startAnimation()
+                }
                 
             case is GameOverState:
                 if touchLocation.x < size.width * 0.6 {

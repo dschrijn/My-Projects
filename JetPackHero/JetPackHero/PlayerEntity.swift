@@ -10,69 +10,78 @@ import SpriteKit
 import GameplayKit
 
 class PlayerEntity: GKEntity {
-    var spriteComponent: SpriteComponent!
-    var movementComponent: MovementComponent!
-    var movementAllowed = false
-    var animationComponent: AnimationComponent!
-    var starComponent: StarComponent!
-    var numberOfFrames = 3
     
-    init (imageName: String) {
+    // MARK: - Properties
+    
+    let texture: SKTexture
+    let numberOfFrames = 3
+    var movementAllowed = false
+
+    lazy var spriteComponent: SpriteComponent = {
+        return SpriteComponent(entity: self, texture: self.texture, size: self.texture.size())
+    }()
+
+    lazy var movementComponent: MovementComponent = {
+        return MovementComponent(entity: self)
+    }()
+    
+    lazy var animationComponent: AnimationComponent = self.createAnimationComponent()
+    
+    lazy var starComponent: StarComponent = {
+        let starTexture = SKTexture(imageNamed: "star")
+        return StarComponent(entity: self, textures: [starTexture])
+    }()
+    
+    // MARK: - Initialization
+    
+    init(imageName: String) {
+        self.texture = SKTexture(imageNamed: imageName)
+        
         super.init()
-        
-        let texture = SKTexture(imageNamed: imageName)
-        spriteComponent = SpriteComponent(entity: self, texture: texture, size: texture.size())
-        addComponent(spriteComponent)
-        
-        movementComponent = MovementComponent(entity: self)
-        addComponent(movementComponent)
-        
-//        //Adding punch textures
-//        //Forward punch
-//        var punchTextures: Array<SKTexture> = []
-//        for i in 0..<numberOfFrames {
-//            punchTextures.append(SKTexture(imageNamed: "Punch\(i)"))
-//        }
-//        //Backwards punch
-//        for i in stride(from: numberOfFrames, to: 0, by: -1) {
-//            punchTextures.append(SKTexture(imageNamed: "Punch\(i)"))
-//        }
-//        //Add to Entity
-//        punchingComponent = PunchingComponent(entity: self, textures: punchTextures)
-//        addComponent(punchingComponent)
-        
-        //Adding Character Textures for animation
-        //Forward Animation
-        var textures: Array<SKTexture> = []
-        for i in 0..<numberOfFrames {
-            textures.append(SKTexture(imageNamed: "Bird\(i)"))
-        }
-        //Backwards Animation // Refactor for flapping animation
-        for i in stride(from: numberOfFrames, to: 0, by: -1) {
-             textures.append(SKTexture(imageNamed: "Bird\(i)"))
-        }
-        //Add to entity
-        animationComponent = AnimationComponent(entity: self, textures: textures)
-        addComponent(animationComponent)
+    
+        addComponents()
         movementComponent.applyInitialImpulse()
-        
-        
-        
+        addPhysics()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Methods
+    
+    func addComponents() {
+        addComponent(spriteComponent)
+        addComponent(movementComponent)
+        addComponent(animationComponent)
+        addComponent(starComponent)
+    }
+    
+    func addPhysics() {
         //Add Physics
         let spriteNode = spriteComponent.node
         //let size = spriteNode.size
         //let center = CGPoint(x: spriteNode.frame.midX, y: spriteNode.frame.midY)
         //spriteNode.physicsBody = SKPhysicsBody(rectangleOf: size, center: center)
         spriteNode.physicsBody = SKPhysicsBody(texture: spriteNode.texture!, size: spriteNode.frame.size)
-        spriteNode.physicsBody!.categoryBitMask = PhysicsCategory.Player
+        spriteNode.physicsBody!.categoryBitMask = PhysicsCategory.player.rawValue
         spriteNode.physicsBody!.collisionBitMask = 0
-        spriteNode.physicsBody!.contactTestBitMask = PhysicsCategory.Obstacle | PhysicsCategory.Ground | PhysicsCategory.Star
-        
-        
+        spriteNode.physicsBody!.contactTestBitMask = PhysicsCategory.obstacle.rawValue | PhysicsCategory.ground.rawValue | PhysicsCategory.star.rawValue
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func createAnimationComponent() -> AnimationComponent {
+        var textures: [SKTexture] = []
+        for i in 0..<numberOfFrames {
+            textures.append(SKTexture(imageNamed: "Bird\(i)"))
+        }
+        //Backwards Animation // Refactor for flapping animation
+        for i in stride(from: numberOfFrames, to: 0, by: -1) {
+            textures.append(SKTexture(imageNamed: "Bird\(i)"))
+        }
+        //Add to entity
+        return AnimationComponent(entity: self, textures: textures)
     }
+    
+    
 }
 

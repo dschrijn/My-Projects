@@ -50,6 +50,15 @@ class AnimationComponent: GKComponent {
         stopAnimation("Wobble")
         stopAnimation("Wobble-Flap")    }
     
+    //Player invicible animation Function
+    func playerInvicible() {
+        let pulseOutGroup = SKAction.group([SKAction.fadeAlpha(to: 0.6, duration: 0.6), SKAction.scale(to: 1.3, duration: 0.8)])
+        let pulseInGroup = SKAction.group([SKAction.fadeAlpha(to: 1, duration: 1.5), SKAction.scale(to: 1, duration: 1.3)])
+        let pulseSequence = SKAction.sequence([pulseOutGroup, pulseInGroup])
+        let repeatPulse = SKAction.repeatForever(pulseSequence)
+        spriteComponent.node.run(repeatPulse, withKey: "Invicible")
+    }
+    
     //Start Animation Function
     func startAnimation() {
         if(spriteComponent.node.action(forKey: "Flap") == nil) {
