@@ -23,7 +23,7 @@ class PlayingState: GKState {
     override func didEnter(from previousState: GKState?) {
         scene.startSpawningMultipleObstacles()
         scene.player.movementAllowed = true
-        scene.player.animationComponent.startAnimation()
+        //scene.player.animationComponent.startAnimation()
         scene.player.animationComponent.stopWobble()
         setupPunchButton()
         MusicManager.shared.setup()

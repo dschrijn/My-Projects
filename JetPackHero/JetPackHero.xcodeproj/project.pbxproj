@@ -43,7 +43,7 @@
 		D9A6FBFC1EB15ADE0039A983 /* MainMenuState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FBFB1EB15ADE0039A983 /* MainMenuState.swift */; };
 		D9A6FBFE1EB15AEF0039A983 /* TutorialState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FBFD1EB15AEF0039A983 /* TutorialState.swift */; };
 		D9A6FC001EB3B4EA0039A983 /* AnimationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FBFF1EB3B4EA0039A983 /* AnimationComponent.swift */; };
-		D9A6FC021EB797500039A983 /* PunchingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FC011EB797500039A983 /* PunchingComponent.swift */; };
+		D9A6FC021EB797500039A983 /* StarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FC011EB797500039A983 /* StarComponent.swift */; };
 		D9A6FC041EB7E4870039A983 /* epic.wav in Resources */ = {isa = PBXBuildFile; fileRef = D9A6FC031EB7E4870039A983 /* epic.wav */; };
 		D9A6FC061EB7F5C10039A983 /* StarEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FC051EB7F5C10039A983 /* StarEntity.swift */; };
 		D9A6FC081EB820310039A983 /* MusicPlayerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FC071EB820310039A983 /* MusicPlayerComponent.swift */; };
@@ -88,7 +88,7 @@
 		D9A6FBFB1EB15ADE0039A983 /* MainMenuState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuState.swift; sourceTree = "<group>"; };
 		D9A6FBFD1EB15AEF0039A983 /* TutorialState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialState.swift; sourceTree = "<group>"; };
 		D9A6FBFF1EB3B4EA0039A983 /* AnimationComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationComponent.swift; sourceTree = "<group>"; };
-		D9A6FC011EB797500039A983 /* PunchingComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PunchingComponent.swift; sourceTree = "<group>"; };
+		D9A6FC011EB797500039A983 /* StarComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarComponent.swift; sourceTree = "<group>"; };
 		D9A6FC031EB7E4870039A983 /* epic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epic.wav; sourceTree = "<group>"; };
 		D9A6FC051EB7F5C10039A983 /* StarEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarEntity.swift; sourceTree = "<group>"; };
 		D9A6FC071EB820310039A983 /* MusicPlayerComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerComponent.swift; sourceTree = "<group>"; };
@@ -155,7 +155,7 @@
 				D9A6FBC11EAFF35B0039A983 /* SpriteComponent.swift */,
 				D9A6FBC31EAFF7DF0039A983 /* MovementComponent.swift */,
 				D9A6FBFF1EB3B4EA0039A983 /* AnimationComponent.swift */,
-				D9A6FC011EB797500039A983 /* PunchingComponent.swift */,
+				D9A6FC011EB797500039A983 /* StarComponent.swift */,
 				D9A6FC071EB820310039A983 /* MusicPlayerComponent.swift */,
 			);
 			name = Components;
@@ -340,7 +340,7 @@
 				D9A6FBFE1EB15AEF0039A983 /* TutorialState.swift in Sources */,
 				D9A6FBF11EB14D4C0039A983 /* CGVector+Extensions.swift in Sources */,
 				D9A6FBF51EB14D4C0039A983 /* SKColor+Extensions.swift in Sources */,
-				D9A6FC021EB797500039A983 /* PunchingComponent.swift in Sources */,
+				D9A6FC021EB797500039A983 /* StarComponent.swift in Sources */,
 				D9A6FBF71EB14D4C0039A983 /* SKTAudio.swift in Sources */,
 				D9A6FB591EAD4E430039A983 /* AppDelegate.swift in Sources */,
 			);
@@ -508,6 +508,7 @@
 				D9A6FB6F1EAD4E430039A983 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

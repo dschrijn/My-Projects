@@ -26,7 +26,7 @@ class AnimationComponent: GKComponent {
     override func update(deltaTime seconds: TimeInterval) {
         if let player = entity as? PlayerEntity {
             if player.movementAllowed {
-                startAnimation()
+                //startAnimation()
             } else {
                 stopAnimation("Flap")
             }

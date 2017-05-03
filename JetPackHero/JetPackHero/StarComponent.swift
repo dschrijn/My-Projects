@@ -9,10 +9,10 @@
 import SpriteKit
 import GameplayKit
 
-class PunchingComponent: GKComponent {
+class StarComponent: GKComponent {
     let spriteComponent: SpriteComponent!
     var textures: Array<SKTexture> = []
-    var isPunching: Bool = false
+    var isInvulnerable: Bool = false
     
     init(entity: GKEntity, textures: Array<SKTexture>) {
         self.textures = textures
@@ -24,19 +24,19 @@ class PunchingComponent: GKComponent {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func applyPunch(_ timeInterval: TimeInterval) {
-        if !isPunching {
+    func applyInvulnerable(_ timeInterval: TimeInterval) {
+        if !isInvulnerable {
             //Sprite
             let spriteNode = spriteComponent.node as? PlayerEntity
             
-            isPunching = true
-            print("I'm Punching")
+            isInvulnerable = true
+            print("I'm invicible!!")
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: { 
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10), execute: {
                 
                 
-                self.isPunching = false
-                print("Not punching anymore")
+                self.isInvulnerable = false
+                print("Not invicible anymore!!")
             })
         }
         

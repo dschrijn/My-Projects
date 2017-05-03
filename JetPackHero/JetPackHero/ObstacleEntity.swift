@@ -21,10 +21,11 @@ class ObstacleEntity: GKEntity {
         
         //Adding Physics
         let spriteNode = spriteComponent.node
-        spriteNode.physicsBody = SKPhysicsBody(rectangleOf: spriteNode.size)
-        spriteNode.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
-        spriteNode.physicsBody?.collisionBitMask = 0
-        spriteNode.physicsBody?.contactTestBitMask = PhysicsCategory.Player
+        let center = CGPoint(x: spriteNode.frame.midX, y: spriteNode.frame.midY)
+        spriteNode.physicsBody = SKPhysicsBody(rectangleOf: spriteNode.size, center: center)
+        spriteNode.physicsBody!.categoryBitMask = PhysicsCategory.Obstacle
+        spriteNode.physicsBody!.collisionBitMask = 0
+        spriteNode.physicsBody!.contactTestBitMask = PhysicsCategory.Player
     }
     
     required init?(coder aDecoder: NSCoder) {

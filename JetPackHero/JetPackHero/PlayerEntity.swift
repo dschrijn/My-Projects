@@ -14,7 +14,7 @@ class PlayerEntity: GKEntity {
     var movementComponent: MovementComponent!
     var movementAllowed = false
     var animationComponent: AnimationComponent!
-    var punchingComponent: PunchingComponent!
+    var starComponent: StarComponent!
     var numberOfFrames = 3
     
     init (imageName: String) {
@@ -41,7 +41,7 @@ class PlayerEntity: GKEntity {
 //        punchingComponent = PunchingComponent(entity: self, textures: punchTextures)
 //        addComponent(punchingComponent)
         
-        //Adding Flapping Textures
+        //Adding Character Textures for animation
         //Forward Animation
         var textures: Array<SKTexture> = []
         for i in 0..<numberOfFrames {
@@ -60,10 +60,13 @@ class PlayerEntity: GKEntity {
         
         //Add Physics
         let spriteNode = spriteComponent.node
+        //let size = spriteNode.size
+        //let center = CGPoint(x: spriteNode.frame.midX, y: spriteNode.frame.midY)
+        //spriteNode.physicsBody = SKPhysicsBody(rectangleOf: size, center: center)
         spriteNode.physicsBody = SKPhysicsBody(texture: spriteNode.texture!, size: spriteNode.frame.size)
-        spriteNode.physicsBody?.categoryBitMask = PhysicsCategory.Player
-        spriteNode.physicsBody?.collisionBitMask = 0
-        spriteNode.physicsBody?.contactTestBitMask = PhysicsCategory.Obstacle | PhysicsCategory.Ground
+        spriteNode.physicsBody!.categoryBitMask = PhysicsCategory.Player
+        spriteNode.physicsBody!.collisionBitMask = 0
+        spriteNode.physicsBody!.contactTestBitMask = PhysicsCategory.Obstacle | PhysicsCategory.Ground | PhysicsCategory.Star
         
         
     }

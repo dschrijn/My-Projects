@@ -81,7 +81,7 @@ class MovementComponent: GKComponent {
         spriteNode.zRotation += angularStep
         spriteNode.zRotation = min(max(spriteNode.zRotation, minDegree.degreesToRadians()), maxDegree.degreesToRadians())
         
-        //Ground Collusion
+        //Ground Collision
         if spriteNode.position.y - spriteNode.size.height / 2 < playableStart {
             spriteNode.position = CGPoint(x: spriteNode.position.x, y: playableStart + spriteNode.size.height / 2)
         }
