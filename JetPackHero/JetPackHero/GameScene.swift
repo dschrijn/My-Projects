@@ -175,7 +175,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //Function to add score label
     func setupScoreLabel() {
         scoreLabel = SKLabelNode(fontNamed: fontName)
-        scoreLabel.fontColor = SKColor(red: 101.0/255.0, green: 71.0/255.0, blue: 73.0/255.0, alpha: 1.0)
+        scoreLabel.fontColor = SKColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.0)
         scoreLabel.fontSize = 50
         scoreLabel.position = CGPoint(x: size.width / 2, y: size.height - margin)
         scoreLabel.verticalAlignmentMode = .top

@@ -30,8 +30,8 @@ class MainMenuState: GKState {
     func setupMainMenu() {
         
         //Logo
-        let logo = SKSpriteNode(imageNamed: "Logo")
-        logo.position = CGPoint(x: scene.size.width / 2, y: scene.size.height / 0.8)
+        let logo = SKSpriteNode(imageNamed: "JPHLogo")
+        logo.position = CGPoint(x: scene.size.width / 2, y: scene.size.height * 0.8)
         logo.zPosition = Layer.ui.rawValue
         scene.worldNode.addChild(logo)
         

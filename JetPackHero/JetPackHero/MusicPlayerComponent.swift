@@ -22,7 +22,7 @@ class MusicManager {
     
     func setup() {
         do {
-            audioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "epic", ofType: "wav")!))
+            audioPlayer =  try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "ninja", ofType: "wav")!))
             audioPlayer.prepareToPlay()
             
         } catch {

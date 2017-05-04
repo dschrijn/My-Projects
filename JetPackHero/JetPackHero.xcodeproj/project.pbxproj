@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D920812D1EBA9C85003833DC /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = D920812C1EBA9C85003833DC /* sprites.atlas */; };
+		D920812F1EBBC16A003833DC /* ninja.wav in Resources */ = {isa = PBXBuildFile; fileRef = D920812E1EBBC16A003833DC /* ninja.wav */; };
 		D9A6FB591EAD4E430039A983 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FB581EAD4E430039A983 /* AppDelegate.swift */; };
 		D9A6FB5F1EAD4E430039A983 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FB5E1EAD4E430039A983 /* GameScene.swift */; };
 		D9A6FB611EAD4E430039A983 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FB601EAD4E430039A983 /* GameViewController.swift */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		D920812C1EBA9C85003833DC /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = sprites.atlas; path = Resources/Artwork/sprites.atlas; sourceTree = "<group>"; };
+		D920812E1EBBC16A003833DC /* ninja.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ninja.wav; sourceTree = "<group>"; };
 		D9A6FB551EAD4E430039A983 /* JetPackHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JetPackHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A6FB581EAD4E430039A983 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9A6FB5E1EAD4E430039A983 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			children = (
 				D9A6FBD41EB14C770039A983 /* coin.wav */,
 				D9A6FBD51EB14C770039A983 /* ding.wav */,
+				D920812E1EBBC16A003833DC /* ninja.wav */,
 				D9A6FC031EB7E4870039A983 /* epic.wav */,
 				D9A6FBD61EB14C770039A983 /* falling.wav */,
 				D9A6FBD71EB14C770039A983 /* flapping.wav */,
@@ -294,6 +297,7 @@
 				D9A6FBE21EB14C770039A983 /* whack.wav in Resources */,
 				D9A6FB641EAD4E430039A983 /* Main.storyboard in Resources */,
 				D9A6FB661EAD4E430039A983 /* Assets.xcassets in Resources */,
+				D920812F1EBBC16A003833DC /* ninja.wav in Resources */,
 				D9A6FC041EB7E4870039A983 /* epic.wav in Resources */,
 				D920812D1EBA9C85003833DC /* sprites.atlas in Resources */,
 				D9A6FB691EAD4E430039A983 /* LaunchScreen.storyboard in Resources */,

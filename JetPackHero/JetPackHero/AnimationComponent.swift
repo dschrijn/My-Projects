@@ -52,12 +52,12 @@ class AnimationComponent: GKComponent {
     
     //Player invicible animation Function
     func playerInvicible() {
-        let enlarge = SKAction.scale(to: 1.5, duration: 0.8)
+        let enlarge = SKAction.scale(to: 2.5, duration: 0.5)
         
         spriteComponent.node.run(enlarge, withKey: "Invicible")
     }
     func playerReturn() {
-        let returnSmall = SKAction.scale(to: 1, duration: 0.8)
+        let returnSmall = SKAction.scale(to: 1, duration: 0.6)
         
         spriteComponent.node.run(returnSmall, withKey: "UnInvicible")
     }
