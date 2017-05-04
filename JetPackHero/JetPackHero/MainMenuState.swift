@@ -36,24 +36,24 @@ class MainMenuState: GKState {
         scene.worldNode.addChild(logo)
         
         //Play Button
-        let playButton = SKSpriteNode(imageNamed: "Button")
+        let playButton = SKSpriteNode(imageNamed: "PlayButton")
         playButton.position = CGPoint(x: scene.size.width * 0.25, y: scene.size.height * 0.25)
         playButton.zPosition = Layer.ui.rawValue
         scene.worldNode.addChild(playButton)
         
-        let playButtonText = SKSpriteNode(imageNamed: "Play")
-        playButtonText.position = CGPoint.zero
-        playButton.addChild(playButtonText)
+//        let playButtonText = SKSpriteNode(imageNamed: "Play")
+//        playButtonText.position = CGPoint.zero
+//        playButton.addChild(playButtonText)
         
         //Rate Button
-        let rateButton = SKSpriteNode(imageNamed: "Button")
+        let rateButton = SKSpriteNode(imageNamed: "RateButton")
         rateButton.position = CGPoint(x: scene.size.width * 0.75, y: scene.size.height * 0.25)
         rateButton.zPosition = Layer.ui.rawValue
         scene.worldNode.addChild(rateButton)
         
-        let rateButtonText = SKSpriteNode(imageNamed: "Rate")
-        rateButtonText.position = CGPoint.zero
-        rateButton.addChild(rateButtonText)
+//        let rateButtonText = SKSpriteNode(imageNamed: "Rate")
+//        rateButtonText.position = CGPoint.zero
+//        rateButton.addChild(rateButtonText)
         
         //Learn Button
         let learnButton = SKSpriteNode(imageNamed: "button_learn")

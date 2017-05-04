@@ -52,11 +52,14 @@ class AnimationComponent: GKComponent {
     
     //Player invicible animation Function
     func playerInvicible() {
-        let pulseOutGroup = SKAction.group([SKAction.fadeAlpha(to: 0.6, duration: 0.6), SKAction.scale(to: 1.3, duration: 0.8)])
-        let pulseInGroup = SKAction.group([SKAction.fadeAlpha(to: 1, duration: 1.5), SKAction.scale(to: 1, duration: 1.3)])
-        let pulseSequence = SKAction.sequence([pulseOutGroup, pulseInGroup])
-        let repeatPulse = SKAction.repeatForever(pulseSequence)
-        spriteComponent.node.run(repeatPulse, withKey: "Invicible")
+        let enlarge = SKAction.scale(to: 1.5, duration: 0.8)
+        
+        spriteComponent.node.run(enlarge, withKey: "Invicible")
+    }
+    func playerReturn() {
+        let returnSmall = SKAction.scale(to: 1, duration: 0.8)
+        
+        spriteComponent.node.run(returnSmall, withKey: "UnInvicible")
     }
     
     //Start Animation Function

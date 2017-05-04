@@ -52,7 +52,7 @@ class GameOverState: GKState {
             setBestScore(scene.score)
         }
         
-        let scorecard = SKSpriteNode(imageNamed: "ScoreCard")
+        let scorecard = SKSpriteNode(imageNamed: "BobScoreCard")
         scorecard.position = CGPoint(x: scene.size.width * 0.5, y: scene.size.height * 0.5)
         scorecard.name = "Tutorial"
         scorecard.zPosition = Layer.ui.rawValue
@@ -77,25 +77,25 @@ class GameOverState: GKState {
         gameOver.zPosition = Layer.ui.rawValue
         scene.worldNode.addChild(gameOver)
         
-        let okButton  = SKSpriteNode(imageNamed: "Button")
+        let okButton  = SKSpriteNode(imageNamed: "OKButton")
         okButton.position = CGPoint(x: scene.size.width * 0.25, y: scene.size.height / 2 - scorecard.size.height / 2 - scene.margin - okButton.size.height / 2)
         okButton.zPosition = Layer.ui.rawValue
         scene.worldNode.addChild(okButton)
         
-        let okText = SKSpriteNode(imageNamed: "OK")
-        okText.position = CGPoint.zero
-        okText.zPosition = Layer.ui.rawValue
-        okButton.addChild(okText)
+//        let okText = SKSpriteNode(imageNamed: "OK")
+//        okText.position = CGPoint.zero
+//        okText.zPosition = Layer.ui.rawValue
+//        okButton.addChild(okText)
         
-        let shareButton  = SKSpriteNode(imageNamed: "Button")
+        let shareButton  = SKSpriteNode(imageNamed: "ShareButton")
         shareButton.position = CGPoint(x: scene.size.width * 0.75, y: scene.size.height / 2 - scorecard.size.height / 2 - scene.margin - shareButton.size.height / 2)
         shareButton.zPosition = Layer.ui.rawValue
         scene.worldNode.addChild(shareButton)
         
-        let shareText = SKSpriteNode(imageNamed: "Share")
-        shareText.position = CGPoint.zero
-        shareText.zPosition = Layer.ui.rawValue
-        shareButton.addChild(shareText)
+//        let shareText = SKSpriteNode(imageNamed: "Share")
+//        shareText.position = CGPoint.zero
+//        shareText.zPosition = Layer.ui.rawValue
+//        shareButton.addChild(shareText)
         
         //Animation
         gameOver.setScale(0)

@@ -50,7 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let gapMultiplier: CGFloat = 5.0 //Increase number to decrease difficulty.
     var firstSpawnDelay: TimeInterval = 1.75
     var everySpawnDelay: TimeInterval = 1.5
-    let player = PlayerEntity(imageName: "Bird0")
+    let player = PlayerEntity(imageName: "TestBob0")
     let popAction = SKAction.playSoundFileNamed("pop.wav", waitForCompletion: false)
     let gameMusic = SKAction.playSoundFileNamed("epic.wav", waitForCompletion: false)
     var score = 0
@@ -349,7 +349,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .ground?:
             stateMachine.enter(GameOverState.self)
         case .star?:
-            groundSpeed = 500 // TODO: Does not effect groundSpeed in createOstacle
+            groundSpeed = 500 
             player.animationComponent.playerInvicible()
             let invulnerableTime = 8
             player.starComponent.applyInvulnerable(TimeInterval(invulnerableTime))
@@ -361,7 +361,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(invulnerableTime), execute: {
                 self.groundSpeed = 150
                 spawnAction?.speed = 1.0
-                self.player.animationComponent.stopAnimation("Invicible")
+                self.player.animationComponent.playerReturn()
             })
         case .obstacle? where !player.starComponent.isInvulnerable:
             self.player.animationComponent.stopAnimation("Invicible")

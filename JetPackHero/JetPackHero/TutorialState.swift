@@ -29,7 +29,7 @@ class TutorialState: GKState {
         scene.setupScoreLabel()
         
         //Tutorial
-        let tutorial = SKSpriteNode(imageNamed: "Tutorial")
+        let tutorial = SKSpriteNode(imageNamed: "BobTutorial")
         tutorial.position = CGPoint(x: scene.size.width * 0.5, y: scene.playableHeight * 0.4 + scene.playableStart)
         tutorial.name = "Tutorial"
         tutorial.zPosition = Layer.ui.rawValue

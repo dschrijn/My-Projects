@@ -60,23 +60,36 @@ class PlayerEntity: GKEntity {
     func addPhysics() {
         //Add Physics
         let spriteNode = spriteComponent.node
-        //let size = spriteNode.size
-        //let center = CGPoint(x: spriteNode.frame.midX, y: spriteNode.frame.midY)
-        //spriteNode.physicsBody = SKPhysicsBody(rectangleOf: size, center: center)
-        spriteNode.physicsBody = SKPhysicsBody(texture: spriteNode.texture!, size: spriteNode.frame.size)
+        let size = spriteNode.size
+        let center = CGPoint(x: spriteNode.frame.midX, y: spriteNode.frame.midY)
+        spriteNode.physicsBody = SKPhysicsBody(rectangleOf: size, center: center)
+        //spriteNode.physicsBody = SKPhysicsBody(texture: spriteNode.texture!, size: spriteNode.frame.size)
         spriteNode.physicsBody!.categoryBitMask = PhysicsCategory.player.rawValue
         spriteNode.physicsBody!.collisionBitMask = 0
         spriteNode.physicsBody!.contactTestBitMask = PhysicsCategory.obstacle.rawValue | PhysicsCategory.ground.rawValue | PhysicsCategory.star.rawValue
     }
     
     func createAnimationComponent() -> AnimationComponent {
-        var textures: [SKTexture] = []
+        var textures: Array<SKTexture> = []
         for i in 0..<numberOfFrames {
-            textures.append(SKTexture(imageNamed: "Bird\(i)"))
+            textures.append(SKTexture(imageNamed: "TestBob\(i)"))
         }
         //Backwards Animation // Refactor for flapping animation
         for i in stride(from: numberOfFrames, to: 0, by: -1) {
-            textures.append(SKTexture(imageNamed: "Bird\(i)"))
+            textures.append(SKTexture(imageNamed: "TestBob\(i)"))
+        }
+        //Add to entity
+        return AnimationComponent(entity: self, textures: textures)
+    }
+    
+    func createfallingAnimation() -> AnimationComponent {
+        var textures: Array<SKTexture> = []
+        for i in 0..<numberOfFrames {
+            textures.append(SKTexture(imageNamed: "Falling\(i)"))
+        }
+        //Backwards Animation // Refactor for flapping animation
+        for i in stride(from: numberOfFrames, to: 0, by: -1) {
+            textures.append(SKTexture(imageNamed: "Falling\(i)"))
         }
         //Add to entity
         return AnimationComponent(entity: self, textures: textures)
