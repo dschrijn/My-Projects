@@ -82,20 +82,20 @@ class GameOverState: GKState {
         okButton.zPosition = Layer.ui.rawValue
         scene.worldNode.addChild(okButton)
         
-//        let okText = SKSpriteNode(imageNamed: "OK")
-//        okText.position = CGPoint.zero
-//        okText.zPosition = Layer.ui.rawValue
-//        okButton.addChild(okText)
+        //        let okText = SKSpriteNode(imageNamed: "OK")
+        //        okText.position = CGPoint.zero
+        //        okText.zPosition = Layer.ui.rawValue
+        //        okButton.addChild(okText)
         
         let shareButton  = SKSpriteNode(imageNamed: "ShareButton")
         shareButton.position = CGPoint(x: scene.size.width * 0.75, y: scene.size.height / 2 - scorecard.size.height / 2 - scene.margin - shareButton.size.height / 2)
         shareButton.zPosition = Layer.ui.rawValue
         scene.worldNode.addChild(shareButton)
         
-//        let shareText = SKSpriteNode(imageNamed: "Share")
-//        shareText.position = CGPoint.zero
-//        shareText.zPosition = Layer.ui.rawValue
-//        shareButton.addChild(shareText)
+        //        let shareText = SKSpriteNode(imageNamed: "Share")
+        //        shareText.position = CGPoint.zero
+        //        shareText.zPosition = Layer.ui.rawValue
+        //        shareButton.addChild(shareText)
         
         //Animation
         gameOver.setScale(0)

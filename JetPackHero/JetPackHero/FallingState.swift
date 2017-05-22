@@ -35,8 +35,6 @@ class FallingState: GKState {
         scene.run(SKAction.sequence([whackAction, SKAction.wait(forDuration: 0.1), fallingAction]))
         scene.stopSpawning()
         
-        //scene.stateMachine.enter(GameOverState.self)
-        
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

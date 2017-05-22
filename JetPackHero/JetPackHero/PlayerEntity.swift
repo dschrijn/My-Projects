@@ -14,18 +14,22 @@ class PlayerEntity: GKEntity {
     // MARK: - Properties
     
     let texture: SKTexture
+    let fallingTextures: SKTexture
     let numberOfFrames = 3
+    let anotherNumberOfFrames = 2
     var movementAllowed = false
-
+    
     lazy var spriteComponent: SpriteComponent = {
         return SpriteComponent(entity: self, texture: self.texture, size: self.texture.size())
     }()
-
+    
     lazy var movementComponent: MovementComponent = {
         return MovementComponent(entity: self)
     }()
     
     lazy var animationComponent: AnimationComponent = self.createAnimationComponent()
+    
+    lazy var otherAnimationComponent: AnimationComponent = self.createFallingAnimation()
     
     lazy var starComponent: StarComponent = {
         let starTexture = SKTexture(imageNamed: "star")
@@ -36,9 +40,9 @@ class PlayerEntity: GKEntity {
     
     init(imageName: String) {
         self.texture = SKTexture(imageNamed: imageName)
-        
+        self.fallingTextures = SKTexture(imageNamed: imageName)
         super.init()
-    
+        
         addComponents()
         movementComponent.applyInitialImpulse()
         addPhysics()
@@ -54,6 +58,7 @@ class PlayerEntity: GKEntity {
         addComponent(spriteComponent)
         addComponent(movementComponent)
         addComponent(animationComponent)
+        addComponent(otherAnimationComponent)
         addComponent(starComponent)
     }
     
@@ -79,20 +84,20 @@ class PlayerEntity: GKEntity {
             textures.append(SKTexture(imageNamed: "TestBob\(i)"))
         }
         //Add to entity
-        return AnimationComponent(entity: self, textures: textures)
+        return AnimationComponent(entity: self, textures: textures, fallingTextures: [fallingTextures])
     }
     
-    func createfallingAnimation() -> AnimationComponent {
-        var textures: Array<SKTexture> = []
-        for i in 0..<numberOfFrames {
+    func createFallingAnimation() -> AnimationComponent {
+        var textures: [SKTexture] = []
+        for i in 0..<anotherNumberOfFrames {
             textures.append(SKTexture(imageNamed: "Falling\(i)"))
         }
         //Backwards Animation // Refactor for flapping animation
-        for i in stride(from: numberOfFrames, to: 0, by: -1) {
+        for i in stride(from: anotherNumberOfFrames, to: 0, by: -1) {
             textures.append(SKTexture(imageNamed: "Falling\(i)"))
         }
         //Add to entity
-        return AnimationComponent(entity: self, textures: textures)
+        return AnimationComponent(entity: self, textures: textures, fallingTextures: textures)
     }
     
     

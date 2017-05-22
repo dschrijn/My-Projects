@@ -349,22 +349,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .ground?:
             stateMachine.enter(GameOverState.self)
         case .star?:
-            groundSpeed = 500 
-            player.animationComponent.playerInvicible()
+            groundSpeed = 500
+            player.animationComponent.playerColorInvicible()
+            player.animationComponent.playerBigSizeInvicible()
             let invulnerableTime = 8
             player.starComponent.applyInvulnerable(TimeInterval(invulnerableTime))
             removeAllStars()
             let spawnAction = action(forKey: "spawn")
             spawnAction?.speed = 1.7
-
+            
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(invulnerableTime), execute: {
                 self.groundSpeed = 150
                 spawnAction?.speed = 1.0
+                self.player.animationComponent.playerReturnColor()
                 self.player.animationComponent.playerReturn()
             })
         case .obstacle? where !player.starComponent.isInvulnerable:
-            self.player.animationComponent.stopAnimation("Invicible")
+            self.player.animationComponent.playerReturnColor()
+            self.player.movementComponent.isDead = true
             stateMachine.enter(FallingState.self)
         default:
             break
@@ -409,6 +412,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.player.otherAnimationComponent.fallingAnimation()
         self.player.animationComponent.stopAnimation("Flap")
+        
     }
 }

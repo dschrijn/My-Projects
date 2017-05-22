@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D906A1CB1ED37CA500F65B0E /* rocketThruster.wav in Resources */ = {isa = PBXBuildFile; fileRef = D906A1CA1ED37CA500F65B0E /* rocketThruster.wav */; };
 		D920812D1EBA9C85003833DC /* sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = D920812C1EBA9C85003833DC /* sprites.atlas */; };
 		D920812F1EBBC16A003833DC /* ninja.wav in Resources */ = {isa = PBXBuildFile; fileRef = D920812E1EBBC16A003833DC /* ninja.wav */; };
 		D9A6FB591EAD4E430039A983 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A6FB581EAD4E430039A983 /* AppDelegate.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D906A1CA1ED37CA500F65B0E /* rocketThruster.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = rocketThruster.wav; path = "../../../../../../My-Projects/JetPackHero/JetPackHero/Resources/Sounds/rocketThruster.wav"; sourceTree = "<group>"; };
 		D920812C1EBA9C85003833DC /* sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = sprites.atlas; path = Resources/Artwork/sprites.atlas; sourceTree = "<group>"; };
 		D920812E1EBBC16A003833DC /* ninja.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ninja.wav; sourceTree = "<group>"; };
 		D9A6FB551EAD4E430039A983 /* JetPackHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JetPackHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -220,6 +222,7 @@
 				D920812E1EBBC16A003833DC /* ninja.wav */,
 				D9A6FC031EB7E4870039A983 /* epic.wav */,
 				D9A6FBD61EB14C770039A983 /* falling.wav */,
+				D906A1CA1ED37CA500F65B0E /* rocketThruster.wav */,
 				D9A6FBD71EB14C770039A983 /* flapping.wav */,
 				D9A6FBD81EB14C770039A983 /* hitGround.wav */,
 				D9A6FBD91EB14C770039A983 /* pop.wav */,
@@ -295,6 +298,7 @@
 				D9A6FBDE1EB14C770039A983 /* falling.wav in Resources */,
 				D9A6FBDC1EB14C770039A983 /* coin.wav in Resources */,
 				D9A6FBE21EB14C770039A983 /* whack.wav in Resources */,
+				D906A1CB1ED37CA500F65B0E /* rocketThruster.wav in Resources */,
 				D9A6FB641EAD4E430039A983 /* Main.storyboard in Resources */,
 				D9A6FB661EAD4E430039A983 /* Assets.xcassets in Resources */,
 				D920812F1EBBC16A003833DC /* ninja.wav in Resources */,

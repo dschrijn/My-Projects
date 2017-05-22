@@ -14,11 +14,12 @@ class MovementComponent: GKComponent {
     
     //Tapping functionality variables
     var velocity =  CGPoint.zero
-    let gravity: CGFloat = -1000
+    let gravity: CGFloat = -1375
     let impulse: CGFloat = 500
     var playableStart: CGFloat = 0
     let yMax: CGFloat = 1000
-    let jetPackAction = SKAction.playSoundFileNamed("flapping.wav", waitForCompletion: false)
+    let jetPackAction = SKAction.playSoundFileNamed("rocketThruster.wav", waitForCompletion: false)
+    var isDead: Bool = false
     
     var velocityModifier: CGFloat = 1000.0
     var angularVelocity: CGFloat = 0.0
@@ -30,7 +31,6 @@ class MovementComponent: GKComponent {
     
     init(entity: GKEntity) {
         self.spriteComponent = entity.component(ofType: SpriteComponent.self)!
-        
         super.init()
     }
     
@@ -71,15 +71,16 @@ class MovementComponent: GKComponent {
         
         spriteNode.position += velocityStep
         
-        
-        if spriteNode.position.y < lastTouchY {
-            angularVelocity = -velocityModifier.radiansToDegrees()
+        if isDead == true {
+            if spriteNode.position.y < lastTouchY {
+                angularVelocity = -velocityModifier.radiansToDegrees()
+            }
+            
+            //        Rotation
+            let angularStep = angularVelocity * CGFloat(seconds)
+            spriteNode.zRotation += angularStep
+            spriteNode.zRotation = min(max(spriteNode.zRotation, minDegree.degreesToRadians()), maxDegree.degreesToRadians())
         }
-        
-        //Rotation
-        let angularStep = angularVelocity * CGFloat(seconds)
-        spriteNode.zRotation += angularStep
-        spriteNode.zRotation = min(max(spriteNode.zRotation, minDegree.degreesToRadians()), maxDegree.degreesToRadians())
         
         //Ground Collision
         if spriteNode.position.y - spriteNode.size.height / 2 < playableStart {

@@ -12,9 +12,11 @@ import GameplayKit
 class AnimationComponent: GKComponent {
     let spriteComponent: SpriteComponent!
     var textures: Array<SKTexture> = []
+    var fallingTextures: Array<SKTexture> = []
     
-    init(entity: GKEntity, textures: Array<SKTexture>) {
+    init(entity: GKEntity, textures: Array<SKTexture>, fallingTextures: Array<SKTexture>) {
         self.textures = textures
+        self.fallingTextures = fallingTextures
         self.spriteComponent = entity.component(ofType: SpriteComponent.self)!
         super.init()
     }
@@ -50,16 +52,22 @@ class AnimationComponent: GKComponent {
         stopAnimation("Wobble")
         stopAnimation("Wobble-Flap")    }
     
-    //Player invicible animation Function
-    func playerInvicible() {
-        let enlarge = SKAction.scale(to: 2.5, duration: 0.5)
-        
-        spriteComponent.node.run(enlarge, withKey: "Invicible")
+    //Player invicible animation Functions
+    func playerColorInvicible() {
+        let hulk = SKAction.colorize(with: UIColor.green, colorBlendFactor: 1, duration: 0.4)
+        spriteComponent.node.run(hulk, withKey: "startColor")
+    }
+    func playerReturnColor() {
+        let originalColor = SKAction.colorize(with: UIColor.white, colorBlendFactor: 1, duration: 0.3)
+        spriteComponent.node.run(originalColor, withKey: "stopColor")
+    }
+    func playerBigSizeInvicible() {
+        let getLarger = SKAction.scale(by: 4.0, duration: 0.6)
+        spriteComponent.node.run(getLarger, withKey: "starPower")
     }
     func playerReturn() {
         let returnSmall = SKAction.scale(to: 1, duration: 0.6)
-        
-        spriteComponent.node.run(returnSmall, withKey: "UnInvicible")
+        spriteComponent.node.run(returnSmall, withKey: "noPower")
     }
     
     //Start Animation Function
@@ -70,6 +78,16 @@ class AnimationComponent: GKComponent {
             spriteComponent.node.run(repeatAnimation, withKey: "Flap")
         }
     }
+    
+    //Falling Animation Function
+    func fallingAnimation() {
+        if(spriteComponent.node.action(forKey: "Falling") == nil) {
+            let playerAnimation = SKAction.animate(with: fallingTextures, timePerFrame: 0.07)
+            let repeatAnimation = SKAction.repeatForever(playerAnimation)
+            spriteComponent.node.run(repeatAnimation, withKey: "Falling")
+        }
+    }
+    
     //Stop Animation Function
     func stopAnimation(_ name: String) {
         spriteComponent.node.removeAction(forKey: name)
