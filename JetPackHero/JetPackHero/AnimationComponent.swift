@@ -87,7 +87,7 @@ class AnimationComponent: GKComponent {
             spriteComponent.node.run(repeatAnimation, withKey: "Falling")
         }
     }
-    
+
     //Stop Animation Function
     func stopAnimation(_ name: String) {
         spriteComponent.node.removeAction(forKey: name)

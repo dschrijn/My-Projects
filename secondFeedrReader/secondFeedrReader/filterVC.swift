@@ -20,6 +20,14 @@ class filterVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    @IBAction func backBtn(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    @IBAction func newsAPIBtn(_ sender: Any) {
+        if let url = NSURL(string: "https://newsapi.org/") {
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+        }
+    }
     
     @IBAction func topBtn(_ sender: Any) {
         let apiManager = APIManager()

@@ -19,7 +19,7 @@
 		D964C4F01E82F67900367A96 /* sourcesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D964C4EF1E82F67900367A96 /* sourcesVC.swift */; };
 		D964C4F21E831A4D00367A96 /* filterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D964C4F11E831A4D00367A96 /* filterVC.swift */; };
 		D9DCFA861E84734A0054F1EF /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DCFA851E84734A0054F1EF /* WebVC.swift */; };
-		D9DCFA8B1E8474E80054F1EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DCFA891E8474E80054F1EF /* Main.storyboard */; };
+		D9ED110A1EE0A163007F7A1E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9DCFA891E8474E80054F1EF /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,7 +120,7 @@
 				TargetAttributes = {
 					D964C4C71E80AF1700367A96 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 2HEG3JXV9K;
+						DevelopmentTeam = 37H7H24SZS;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -151,7 +151,7 @@
 				D964C4D61E80AF1700367A96 /* LaunchScreen.storyboard in Resources */,
 				D964C4D31E80AF1700367A96 /* Assets.xcassets in Resources */,
 				D964C4E41E80E12E00367A96 /* customTVCell.xib in Resources */,
-				D9DCFA8B1E8474E80054F1EF /* Main.storyboard in Resources */,
+				D9ED110A1EE0A163007F7A1E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,12 +293,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2HEG3JXV9K;
+				DEVELOPMENT_TEAM = 37H7H24SZS;
 				INFOPLIST_FILE = secondFeedrReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.secondFeedrReader;
+				PRODUCT_BUNDLE_IDENTIFIER = io.secondFeedrReader.david;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -306,12 +307,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2HEG3JXV9K;
+				DEVELOPMENT_TEAM = 37H7H24SZS;
 				INFOPLIST_FILE = secondFeedrReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.secondFeedrReader;
+				PRODUCT_BUNDLE_IDENTIFIER = io.secondFeedrReader.david;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

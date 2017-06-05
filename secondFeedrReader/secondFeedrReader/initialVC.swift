@@ -169,6 +169,12 @@ class initialVC: UIViewController, UITableViewDelegate, UITableViewDataSource, F
         performSegue(withIdentifier: "toSources", sender: self)
         
     }
+    @IBAction func newsAPIBtn(_ sender: Any) {
+        //UIApplication.shared.openURL(URL(string: "https://newsapi.org/")!)
+        if let url = NSURL(string: "https://newsapi.org/") {
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+        }
+    }
     
     
 }

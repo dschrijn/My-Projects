@@ -19,6 +19,15 @@ class sourcesVC: UIViewController {
         
     }
     
+    @IBAction func backBtn(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    @IBAction func newAPIBtn(_ sender: Any) {
+        if let url = NSURL(string: "https://newsapi.org/") {
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+        }
+    
+    }
     
     //Mark: Buttons - to change "News Sources"
     
