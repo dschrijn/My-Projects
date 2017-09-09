@@ -11,29 +11,71 @@ import AVFoundation
 
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
+    // Mark: Variables
+    
     var audioRecorder: AVAudioRecorder!
-
-
+    
+    // Mark: IBOutlet
+    
     @IBOutlet weak var tapToRecordLabel: UILabel!
     @IBOutlet weak var recordingButton: UIButton!
     @IBOutlet weak var stopRecordingButtonLabel: UIButton!
     
+    // Mark: App Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        stopRecordingButtonLabel.isEnabled = false
+        configureUI(isRecording: false)
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        print("view will appear")
-    }
-
-
-    @IBAction func recordButton(_ sender: UIButton) {
-        tapToRecordLabel.text = "Recording in Progress..."
-        stopRecordingButtonLabel.isEnabled = true
-        recordingButton.isEnabled = false
+    // Mark: Functions
+    
+    
+    func configureUI(isRecording record: Bool) {
         
+        
+        if record == true {
+            print("Is recording")
+            tapToRecordLabel.text = "Recording in Progress..."
+            recordingButton.isEnabled = false
+            stopRecordingButtonLabel.isEnabled = true
+            
+        } else if record == false {
+            tapToRecordLabel.text = "Tap!"
+            recordingButton.isEnabled = true
+            stopRecordingButtonLabel.isEnabled = false
+        } else {
+            tapToRecordLabel.text = "Tap!"
+            recordingButton.isEnabled = true
+            stopRecordingButtonLabel.isEnabled = false
+        }
+        
+    }
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        print("Recording done!")
+        //Uses the segue to send(sender) the path of the file where it is located.
+        if flag {
+            performSegue(withIdentifier: "stopRecordingSegue", sender: audioRecorder.url)
+        } else {
+            print("Segue failed!")
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "stopRecordingSegue" {
+            let playSoundsVC = segue.destination as! PlaySoundsViewController
+            let recordedAudioURL = sender as! URL
+            playSoundsVC.recordedAudioURL = recordedAudioURL
+        }
+    }
+    
+    // Mark: IBActions
+    
+    @IBAction func recordButton(_ sender: UIButton) {
+        
+        configureUI(isRecording: true)
         // Sets directory to save the array
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         //Filename is the recording
@@ -56,37 +98,14 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.record()
         
     }
-
+    
     @IBAction func stopRecordingButton(_ sender: UIButton) {
-        recordingButton.isEnabled = true
-        stopRecordingButtonLabel.isEnabled = false
-        tapToRecordLabel.text = "Tap!"
         
+        configureUI(isRecording: false)
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
     }
-    
-    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        print("Recording done!")
-        //Uses the segue to send(sender) the path of the file where it is located.
-        if flag {
-           performSegue(withIdentifier: "stopRecordingSegue", sender: audioRecorder.url)
-        } else {
-            print("Segue failed!")
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "stopRecordingSegue" {
-            let playSoundsVC = segue.destination as! PlaySoundsViewController
-            let recordedAudioURL = sender as! URL
-            playSoundsVC.recordedAudioURL = recordedAudioURL
-        }
-    }
-    
-    
-    
     
 }
 
