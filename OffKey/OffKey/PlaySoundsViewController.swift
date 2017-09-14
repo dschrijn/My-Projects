@@ -22,7 +22,7 @@ class PlaySoundsViewController: UIViewController {
     // Mark: Enums
     
     enum ButtonType: Int {
-        case slow = 0, fast, chipmunk, vader, echo, reverb
+        case slow = 0, fast, chipmunk, vader, echo, reverb, robot, alien 
     }
     
     // Mark: IBOutlets
@@ -34,7 +34,9 @@ class PlaySoundsViewController: UIViewController {
     @IBOutlet weak var echoButton: UIButton!
     @IBOutlet weak var reverbButton:UIButton!
     @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var robotButton: UIButton!
     
+    @IBOutlet weak var alienButton: UIButton!
     //Mark: IBActions
     
     @IBAction func playSoundForButton(_ sender: UIButton) {
@@ -47,11 +49,15 @@ class PlaySoundsViewController: UIViewController {
         case .chipmunk:
             playSound(pitch: 1000)
         case .vader:
-            playSound(pitch: -450)
+            playSound(pitch: -650)
         case .echo:
             playSound(echo: true)
         case .reverb:
             playSound(reverb: true)
+        case .robot:
+            playSound(robot: true)
+        case .alien:
+            playSound(alien: true)
         }
         configureUI(.playing)
     }

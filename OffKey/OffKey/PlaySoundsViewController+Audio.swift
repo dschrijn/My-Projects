@@ -43,7 +43,7 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         }
     }
     
-    func playSound(rate: Float? = nil, pitch: Float? = nil, echo: Bool = false, reverb: Bool = false) {
+    func playSound(rate: Float? = nil, pitch: Float? = nil, echo: Bool = false, reverb: Bool = false, robot: Bool = false, alien: Bool = false) {
         
         // initialize audio engine components
         audioEngine = AVAudioEngine()
@@ -73,13 +73,28 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         reverbNode.wetDryMix = 50
         audioEngine.attach(reverbNode)
         
+        // node for robot
+        let robotNode = AVAudioUnitDistortion()
+        robotNode.loadFactoryPreset(.speechRadioTower)
+        audioEngine.attach(robotNode)
+        
+        // node for alien
+        let alienNode = AVAudioUnitDistortion()
+        alienNode.loadFactoryPreset(.multiDistortedSquared)
+        audioEngine.attach(alienNode)
+        
+        
         // connect nodes
-        if echo == true && reverb == true {
-            connectAudioNodes(audioPlayerNode, changeRatePitchNode, echoNode, reverbNode, audioEngine.outputNode)
+        if echo == true && reverb == true && robot == true && alien == true   {
+            connectAudioNodes(audioPlayerNode, changeRatePitchNode, robotNode, echoNode, reverbNode, audioEngine.outputNode)
         } else if echo == true {
             connectAudioNodes(audioPlayerNode, changeRatePitchNode, echoNode, audioEngine.outputNode)
         } else if reverb == true {
             connectAudioNodes(audioPlayerNode, changeRatePitchNode, reverbNode, audioEngine.outputNode)
+        } else if robot == true {
+            connectAudioNodes(audioPlayerNode, changeRatePitchNode, robotNode, audioEngine.outputNode)
+        } else if alien == true {
+            connectAudioNodes(audioPlayerNode, changeRatePitchNode, alienNode, audioEngine.outputNode)
         } else {
             connectAudioNodes(audioPlayerNode, changeRatePitchNode, audioEngine.outputNode)
         }
@@ -161,6 +176,8 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         lowPitchButton.isEnabled = enabled
         echoButton.isEnabled = enabled
         reverbButton.isEnabled = enabled
+        robotButton.isEnabled = enabled
+        alienButton.isEnabled = enabled 
     }
     
     func showAlert(_ title: String, message: String) {
