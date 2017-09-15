@@ -43,7 +43,7 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         }
     }
     
-    func playSound(rate: Float? = nil, pitch: Float? = nil, echo: Bool = false, reverb: Bool = false, robot: Bool = false, alien: Bool = false) {
+    func playSound(rate: Float? = nil, pitch: Float? = nil, echo: Bool = false, reverb: Bool = false, robot: Bool = false, alien: Bool = false, you: Bool = false) {
         
         // initialize audio engine components
         audioEngine = AVAudioEngine()
@@ -61,6 +61,7 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
             changeRatePitchNode.rate = rate
         }
         audioEngine.attach(changeRatePitchNode)
+    
         
         // node for echo
         let echoNode = AVAudioUnitDistortion()
@@ -75,17 +76,17 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         
         // node for robot
         let robotNode = AVAudioUnitDistortion()
-        robotNode.loadFactoryPreset(.speechRadioTower)
+        robotNode.loadFactoryPreset(.speechGoldenPi)
         audioEngine.attach(robotNode)
         
         // node for alien
         let alienNode = AVAudioUnitDistortion()
-        alienNode.loadFactoryPreset(.multiDistortedSquared)
+        alienNode.loadFactoryPreset(.speechCosmicInterference)
         audioEngine.attach(alienNode)
         
         
         // connect nodes
-        if echo == true && reverb == true && robot == true && alien == true   {
+        if echo == true && reverb == true && robot == true && alien == true && you == true   {
             connectAudioNodes(audioPlayerNode, changeRatePitchNode, robotNode, echoNode, reverbNode, audioEngine.outputNode)
         } else if echo == true {
             connectAudioNodes(audioPlayerNode, changeRatePitchNode, echoNode, audioEngine.outputNode)
@@ -95,6 +96,8 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
             connectAudioNodes(audioPlayerNode, changeRatePitchNode, robotNode, audioEngine.outputNode)
         } else if alien == true {
             connectAudioNodes(audioPlayerNode, changeRatePitchNode, alienNode, audioEngine.outputNode)
+        } else if you == true {
+            connectAudioNodes(audioPlayerNode, audioEngine.outputNode)
         } else {
             connectAudioNodes(audioPlayerNode, changeRatePitchNode, audioEngine.outputNode)
         }
@@ -177,7 +180,8 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         echoButton.isEnabled = enabled
         reverbButton.isEnabled = enabled
         robotButton.isEnabled = enabled
-        alienButton.isEnabled = enabled 
+        alienButton.isEnabled = enabled
+        youButton.isEnabled = enabled
     }
     
     func showAlert(_ title: String, message: String) {
