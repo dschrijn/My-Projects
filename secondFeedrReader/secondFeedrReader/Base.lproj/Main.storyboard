@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -444,7 +444,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="rix-we-tUd"/>
                                 </constraints>
-                                <state key="normal" title="ABC News (au)">
+                                <state key="normal" title="News Source 1">
                                     <color key="titleColor" red="0.96862745098039216" green="1" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -457,7 +457,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="MHU-Rm-KjL"/>
                                 </constraints>
-                                <state key="normal" title="Engadget">
+                                <state key="normal" title="News Source 2">
                                     <color key="titleColor" red="0.97040173190000001" green="1" blue="0.99076718139999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -470,7 +470,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Me7-Zy-hPN"/>
                                 </constraints>
-                                <state key="normal" title="Entertinment Weekly">
+                                <state key="normal" title="News Source 3">
                                     <color key="titleColor" red="0.97040173190000001" green="1" blue="0.99076718139999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -483,7 +483,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="wBU-NP-X1u"/>
                                 </constraints>
-                                <state key="normal" title="IGN">
+                                <state key="normal" title="News Source 4">
                                     <color key="titleColor" red="0.97040173190000001" green="1" blue="0.99076718139999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -496,7 +496,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ovb-7S-lcz"/>
                                 </constraints>
-                                <state key="normal" title="The Verge">
+                                <state key="normal" title="News Source 5">
                                     <color key="titleColor" red="0.97040173190000001" green="1" blue="0.99076718139999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -509,7 +509,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ckZ-a3-EN7"/>
                                 </constraints>
-                                <state key="normal" title="USA Today">
+                                <state key="normal" title="News Source 6">
                                     <color key="titleColor" red="0.97040173190000001" green="1" blue="0.99076718139999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
