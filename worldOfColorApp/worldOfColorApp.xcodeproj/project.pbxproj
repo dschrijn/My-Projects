@@ -12,6 +12,7 @@
 		D91A52FB1F7085CD00D2D977 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D91A52FA1F7085CD00D2D977 /* Assets.xcassets */; };
 		D91A52FE1F7085CD00D2D977 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D91A52FC1F7085CD00D2D977 /* LaunchScreen.storyboard */; };
 		D95F2A2C1F7190ED001F23B9 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95F2A2B1F7190ED001F23B9 /* DrawingViewController.swift */; };
+		D95F2A2E1F71C173001F23B9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95F2A2D1F71C173001F23B9 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		D91A52FD1F7085CD00D2D977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D91A52FF1F7085CD00D2D977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D95F2A2B1F7190ED001F23B9 /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
+		D95F2A2D1F71C173001F23B9 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				D91A52F31F7085CD00D2D977 /* AppDelegate.swift */,
+				D95F2A2D1F71C173001F23B9 /* SettingsViewController.swift */,
 				D95F2A2B1F7190ED001F23B9 /* DrawingViewController.swift */,
 				D91A52F71F7085CD00D2D977 /* Main.storyboard */,
 				D91A52FA1F7085CD00D2D977 /* Assets.xcassets */,
@@ -139,6 +142,7 @@
 			files = (
 				D95F2A2C1F7190ED001F23B9 /* DrawingViewController.swift in Sources */,
 				D91A52F41F7085CD00D2D977 /* AppDelegate.swift in Sources */,
+				D95F2A2E1F71C173001F23B9 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
